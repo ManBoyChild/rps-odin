@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+    // Function to prompt user for their choice of RPS
+    function playerInput () {
+        let pinput = prompt("Please select Rock, Paper, or Scissors:");
+        console.log("Your choice was: " + pinput);
+        return pinput;
+    }
+    
+    // Listing the computer choices in an array
+    let choices = ["Rock", "Paper", "Scissors"];
+
+    // This is the computer player
+    // First an array of the different choices is initialized
+    // Second the choice is randomized from the array
+    // Finally the random choice is returned and stored in compPlayer
+    function computerPlay () {
+        let randomSelect = Math.floor(Math.random() * choices.length);
+        console.log("The Computers choice was: " + computerChoice);
+        return choices[randomSelect]; 
+    }
+
+    //These variables keep track of your wins, loses, and draws
+    let playerWins = 0;
+    let computerWins = 0;
+    let draws = 0;
+
+    // This function plays a single round of Rock, Paper, Scissors
+    // It takes the random computer choice and player input as values
+    // Both player and computer choices are converted to upper to nullify and strange inputs
+    // The choices are put through 6 if else statments to see who wins
+    function playRound (player, computer) {
+        // Deals with any strange inputs from the user
+        player = player.toUpperCase();
+        computer = computer.toUpperCase();
+
+        if (player === computer){
+            ++draws;
+            return `It's a draw. You picked ${player} and the computer picked ${computer}.
+            The Current score is Player: ${playerWins}, Computer: ${computerWins}, and
+            Draws: ${draws}.`;
+        } else if (player === "ROCK" && computer === "PAPER") {
+            console.log("Sorry, you lose this round. Rock beats Paper.");
+            return ++computerWins;
+        } else if (player === "PAPER" && computer === "SCISSORS") {
+            console.log("Sorry, you lose this round. Scissors beats Paper.")
+            return ++computerWins;
+        } else if (player === "SCISSORS" && computer === "ROCK") {
+            console.log("Sorry, you lose this round. Rock beats Scissors.")
+            return ++computerWins;
+        } else if (player === "PAPER" && computer === "ROCK") {
+            console.log("Yay, you win this round. Paper bears Rock.")
+            return ++playerWins;
+        } else if (player === "SCISSORS" && computer === "PAPER") {
+            console.log("Yay, you win this round. Scissors beats Paper.")
+            return ++playerWins;
+        } else if (player === "ROCK" && computer === "SCISSORS") {
+            console.log("Yay, you win this round. Rock beats Scissors.")
+            return ++playerWins;
+        } else {
+            console.log("No result was achived due to an error")
+        }
+    }
+    
+        
+    // The game function is really added to make a for loop that plays
+    // the game a specified amount of times. Each time getting the users input,
+    // randomizing the comouter players choice, and tallying wins/loses/draws.
+    function game () {
+        for(let i = 1; i <= 5; i++) {
+            playRound(playerInput(), computerPlay());
+        }
+    }
+
+    // const result = playRound(realPlayer, compPlayer);
+    //      switch(result) {
+    //         case player:
+    //             wins++;
+    //             break;
+    //     }
+
+
+    </script>
+    
+</body>
+</html>
