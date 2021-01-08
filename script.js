@@ -21,7 +21,8 @@ playAgainBtn.addEventListener("click", resetGame);
 function playGame(e) {
     if (playerWins === 5 || computerWins === 5) {
         alert("The maximum score count has been reached. The game will be automatically reset.");
-        window.setInterval(resetGame, 1000);
+        resetGame();
+        console.log(playerWins,computerWins, draws);
         return;
     } else {
         playerSelection(e);
