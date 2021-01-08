@@ -3,10 +3,9 @@ const paperBtn = document.querySelector(".paper");
 const scissorsBtn = document.querySelector(".scissors");
 const playAgainBtn = document.querySelector(".playAgain");
 let resultMessage = document.querySelector(".results");
-let winCounter = document.querySelector(".playerScore");
-let loseCounter = document.querySelector(".computerScore");
-let drawCounter = document.querySelector(".draws");
-let winnerMessage = document.querySelector(".bigWin");
+let winCounter = document.querySelector(".playerScoreCount");
+let loseCounter = document.querySelector(".computerScoreCount");
+let drawCounter = document.querySelector(".drawScoreCount");
 
 let playerInput = "";
 let playerWins = 0;
@@ -21,6 +20,26 @@ playAgainBtn.addEventListener("click,", resetGame);
 function playGame(e) {
     playerSelection(e);
     resultMessage.innerText = playRound(playerInput, computerPlay())
+    console.log(playerWins, computerWins, draws);
+    winCounter.innerText = `${playerWins}`;
+    loseCounter.innerText = `${computerWins}`;
+    drawCounter.innerText = `${draws}`;
+    bigWinner();
+}
+
+function resetGame (e) {
+    let playerChoiceResult = document.querySelector(".playerResult");
+    let computerchoiceResult = document.querySelector(".computerResult");
+    let winnerMessage = document.querySelector(".bigWin");
+
+    playerInput = "";
+    playerWins = 0;
+    computerWins = 0;
+    draws = 0;
+
+    playerChoiceResult.innerText = "";
+    computerchoiceResult.innerText = "";
+    winnerMessage.innerText = "";
 }
 
 function playerSelection (event) {
@@ -35,10 +54,6 @@ function playerSelection (event) {
         playerInput = "Scissors";
     }
     return playerChoiceResult.innerText = ` ${playerInput}`;
-}
-
-function resetGame() {
-    
 }
 
 // Listing the computer choices in an array
@@ -91,11 +106,13 @@ function playRound (player, computer) {
 }
 
 function bigWinner() {
-    if (playerWins >= 3) {
-        console.log("Congratulations! You won the best of 5!");
-    } else if (computerWins >= 3) {
-        console.log("Sorry, but the comouter has won the best of 5.");
+    let winnerMessage = document.querySelector(".bigWin");
+
+    if (playerWins === 5) {
+        winnerMessage.innerText = "Congratulations! You have beaten the computer! If you would like to play again, press the button bellow.";
+    } else if (computerWins === 5) {
+        winnerMessage.innerText = "Better luck next time! The computer beat you! If you would like to play again, press the button bellow.";
     } else {
-        console.log("It was a draw. Play another 5 rounds to determine a winner");
+        winnerMessage.innerText = "";
     }
 }

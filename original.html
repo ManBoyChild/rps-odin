@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+    // Function to prompt user for their choice of RPS
+    function playerInput () {
+        let pinput = prompt("Please select Rock, Paper, or Scissors:");
+        return pinput;
+    }
+    
+    // Listing the computer choices in an array
+    let choices = ["Rock", "Paper", "Scissors"];
+
+    // This is the computer player
+    // First an array of the different choices is initialized
+    // Second the choice is randomized from the array
+    // Finally the random choice is returned and stored in compPlayer
+    function computerPlay () {
+        let randomSelect = Math.floor(Math.random() * choices.length);
+        return choices[randomSelect]; 
+    }
+
+    //These variables keep track of your wins, loses, and draws
+    let playerWins = 0;
+    let computerWins = 0;
+    let draws = 0;
+
+    // This function plays a single round of Rock, Paper, Scissors
+    // It takes the random computer choice and player input as values
+    // Both player and computer choices are converted to upper to nullify and strange inputs
+    // The choices are put through 6 if else statments to see who wins
+    function playRound (player, computer) {
+        // Deals with any strange inputs from the user
+        player = player.toUpperCase();
+        computer = computer.toUpperCase();
+
+        if (player === computer){
+            draws += 1;
+            return `It's a draw. You picked ${player} and the computer picked ${computer}. The Current score is Player: ${playerWins}, Computer: ${computerWins}, and Draws: ${draws}.`;
+        } else if (player === "ROCK" && computer === "PAPER") {
+            computerWins += 1;
+            return `Sorry, you lose. You picked ${player} and the computer picked ${computer}. The Current score is Player: ${playerWins}, Computer: ${computerWins}, and Draws: ${draws}.`;
+        } else if (player === "PAPER" && computer === "SCISSORS") {
+            computerWins += 1;
+            return `Sorry, you lose. You picked ${player} and the computer picked ${computer}. The Current score is Player: ${playerWins}, Computer: ${computerWins}, and Draws: ${draws}.`;
+        } else if (player === "SCISSORS" && computer === "ROCK") {
+            computerWins += 1;
+            return `Sorry, you lose. You picked ${player} and the computer picked ${computer}. The Current score is Player: ${playerWins}, Computer: ${computerWins}, and Draws: ${draws}.`;
+        } else if (player === "PAPER" && computer === "ROCK") {
+            playerWins += 1;
+            return `Yay, you win. You picked ${player} and the computer picked ${computer}. The Current score is Player: ${playerWins}, Computer: ${computerWins}, and Draws: ${draws}.`;
+        } else if (player === "SCISSORS" && computer === "PAPER") {
+            playerWins += 1;
+            return `Yay, you win. You picked ${player} and the computer picked ${computer}. The Current score is Player: ${playerWins}, Computer: ${computerWins}, and Draws: ${draws}.`;
+        } else if (player === "ROCK" && computer === "SCISSORS") {
+            playerWins += 1;
+            return `Yay, you win. You picked ${player} and the computer picked ${computer}. The Current score is Player: ${playerWins}, Computer: ${computerWins}, and Draws: ${draws}.`;
+        }
+    }
+
+    function bigWinner() {
+        if (playerWins >= 3) {
+            console.log("Congratulations! You won the best of 5!");
+        } else if (computerWins >= 3) {
+            console.log("Sorry, but the comouter has won the best of 5.");
+        } else {
+            console.log("It was a draw. Play another 5 rounds to determine a winner");
+        }
+    }
+    
+    // The game function is really added to make a for loop that plays
+    // the game a specified amount of times. Each time getting the users input,
+    // randomizing the comouter players choice, and tallying wins/loses/draws.
+    function game () {
+        for(let i = 0; i < 5; i++) {
+            console.log(playRound(playerInput(), computerPlay()));
+        }
+        bigWinner ();
+    }
+
+
+    </script>
+    
+</body>
+</html>
