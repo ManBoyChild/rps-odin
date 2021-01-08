@@ -19,12 +19,18 @@ playAgainBtn.addEventListener("click", resetGame);
 
 // Called by each the three buttons. Executes a single round and updates all of the neccesary DOM
 function playGame(e) {
-    playerSelection(e);
-    resultMessage.innerText = playRound(playerInput, computerPlay())
-    winCounter.innerText = `${playerWins}`;
-    loseCounter.innerText = `${computerWins}`;
-    drawCounter.innerText = `${draws}`;
-    bigWinner();
+    if (playerWins === 5 || computerWins === 5) {
+        alert("The maximum score count has been reached. The game will be automatically reset.");
+        window.setInterval(resetGame, 1000);
+        return;
+    } else {
+        playerSelection(e);
+        resultMessage.innerText = playRound(playerInput, computerPlay())
+        winCounter.innerText = `${playerWins}`;
+        loseCounter.innerText = `${computerWins}`;
+        drawCounter.innerText = `${draws}`;
+        bigWinner();
+    }
 }
 
 // Resets the game when the button is pressed
@@ -46,6 +52,7 @@ function resetGame (e) {
     drawCounter.innerText = "";
     winnerMessage.innerText = "";
 }
+
 
 // To determine which button (Rock, Paper, Scissors) the player selected
 function playerSelection (event) {
