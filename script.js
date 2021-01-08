@@ -15,18 +15,19 @@ let draws = 0;
 rockBtn.addEventListener("click", playGame);
 paperBtn.addEventListener("click", playGame);
 scissorsBtn.addEventListener("click", playGame);
-playAgainBtn.addEventListener("click,", resetGame);
+playAgainBtn.addEventListener("click", resetGame);
 
+// Called by each the three buttons. Executes a single round and updates all of the neccesary DOM
 function playGame(e) {
     playerSelection(e);
     resultMessage.innerText = playRound(playerInput, computerPlay())
-    console.log(playerWins, computerWins, draws);
     winCounter.innerText = `${playerWins}`;
     loseCounter.innerText = `${computerWins}`;
     drawCounter.innerText = `${draws}`;
     bigWinner();
 }
 
+// Resets the game when the button is pressed
 function resetGame (e) {
     let playerChoiceResult = document.querySelector(".playerResult");
     let computerchoiceResult = document.querySelector(".computerResult");
@@ -39,11 +40,15 @@ function resetGame (e) {
 
     playerChoiceResult.innerText = "";
     computerchoiceResult.innerText = "";
+    resultMessage.innerText = "";
+    winCounter.innerText = "";
+    loseCounter.innerText = "";
+    drawCounter.innerText = "";
     winnerMessage.innerText = "";
 }
 
+// To determine which button (Rock, Paper, Scissors) the player selected
 function playerSelection (event) {
-    let playerChoiceText = document.querySelector(".playerChoice");
     let playerChoiceResult = document.querySelector(".playerResult");
 
     if (event.target.classList.contains("rock")) {
@@ -56,15 +61,9 @@ function playerSelection (event) {
     return playerChoiceResult.innerText = ` ${playerInput}`;
 }
 
-// Listing the computer choices in an array
-let choices = ["Rock", "Paper", "Scissors"];
-
-// This is the computer player
-// First an array of the different choices is initialized
-// Second the choice is randomized from the array
-// Finally the random choice is returned and stored in compPlayer
+// This is the computer player who choses randomly from an array
 function computerPlay () {
-    let computerChoiceText = document.querySelector(".computerChoice");
+    let choices = ["Rock", "Paper", "Scissors"];
     let computerchoiceResult = document.querySelector(".computerResult");
     
     let randomSelect = Math.floor(Math.random() * choices.length);
@@ -73,11 +72,8 @@ function computerPlay () {
 }
 
 // This function plays a single round of Rock, Paper, Scissors
-// It takes the random computer choice and player input as values
-// Both player and computer choices are converted to upper to nullify and strange inputs
-// The choices are put through 6 if else statments to see who wins
 function playRound (player, computer) {
-    // Deals with any strange inputs from the user
+    // Use toUppereCase() so inputs are equal
     player = player.toUpperCase();
     computer = computer.toUpperCase();
 
@@ -105,6 +101,7 @@ function playRound (player, computer) {
     }
 }
 
+// Announces the first person to reach a score of 5
 function bigWinner() {
     let winnerMessage = document.querySelector(".bigWin");
 
